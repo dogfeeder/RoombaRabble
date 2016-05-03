@@ -2,10 +2,18 @@
 using System.Collections;
 
 public class TileCode : MonoBehaviour {
+	
 	private Renderer rend;
+
 	private float timer = 1;
 	private float currentTime;
+
 	private bool touching;
+	private bool clean;
+	private bool removed;
+
+	public GameObject gc;
+
 	// Use this for initialization
 	void Start () {
 		rend = GetComponent<Renderer>();
@@ -18,7 +26,13 @@ public class TileCode : MonoBehaviour {
 			currentTime += Time.deltaTime;
 			if (currentTime > timer) {
 				rend.material.color = Color.white;
+				clean = true;
 			}
+		}
+
+		if (clean && !removed) {
+			gc.GetComponent<GameController>().tileCount -= 1;
+			removed = true;
 		}
 	}
 
@@ -26,7 +40,7 @@ public class TileCode : MonoBehaviour {
 		touching = true;
 	}
 
-	void OnTriggerExit(Collider otheR) {
+	void OnTriggerExit(Collider other) {
 		touching = false;
 		currentTime = 0;
 	}
