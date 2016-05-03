@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Recharge : MonoBehaviour {
 
+	public GameObject AI;
+
 	public bool charging;
 	private GameObject collision;
     public GameObject player;
@@ -24,9 +26,11 @@ public class Recharge : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other) {
 		charging = true;
+		AI.GetComponent<AIScript> ().active = true;
 	}
 
 	private void OnTriggerExit(Collider other) {
 		charging = false;
+		AI.GetComponent<AIScript> ().active = false;
 	}
 }
