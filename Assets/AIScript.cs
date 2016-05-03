@@ -4,7 +4,6 @@ using System.Collections;
 public class AIScript : MonoBehaviour {
 
 	public GameObject player;
-
 	public bool active;
 
 	// Use this for initialization
