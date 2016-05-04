@@ -17,7 +17,8 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		tileCount = tiles.Length;
+        tiles = GameObject.FindGameObjectsWithTag("tile");
+        tileCount = tiles.Length;
 		//Debug.Log (tileCount);
 		tileCountText.text = tileCount.ToString ();
 	}

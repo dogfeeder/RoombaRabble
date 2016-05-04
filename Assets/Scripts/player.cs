@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class player : MonoBehaviour {
 
-    public float moveSpeed = 8;
+    public float moveSpeed = 6;
     public float turnSpeed = 100;
     public float energy = 100;
 
@@ -40,20 +40,21 @@ public class player : MonoBehaviour {
 
         //lock rotation
         //transform.rotation = Quaternion.Euler(0, 0, 0);
+
         //energy use
         if (Input.GetAxis("Horizontal") != 0 )
         {
             if (energy > 0)
             {
-                energy -= 0.1f;
+                //energy -= 0.1f;
             }
         }
 
-        else if (Input.GetAxis("Vertical") != 0)
+        if (Input.GetAxis("Vertical") != 0)
         {
             if (energy > 0)
             {
-                energy -= 0.1f;
+                energy -= 0.05f;
             }
         }
 
