@@ -31,6 +31,5 @@ public class Recharge : MonoBehaviour {
 
 	private void OnTriggerExit(Collider other) {
 		charging = false;
-		AI.GetComponent<AIScript> ().active = false;
 	}
 }
