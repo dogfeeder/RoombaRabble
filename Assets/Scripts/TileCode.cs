@@ -10,9 +10,7 @@ public class TileCode : MonoBehaviour {
 
 	private bool playerTouching;
     private bool enemyTouching;
-	private bool clean;
-
-	public GameObject gc;
+	public bool clean;
 
 	// Use this for initialization
 	void Start () {
@@ -22,12 +20,14 @@ public class TileCode : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (playerTouching) {
+		if (playerTouching && !clean) {
 			currentTime += Time.deltaTime;
             if (currentTime > timer)
             {
+				currentTime = 0;
                 rend.material.color = Color.white;
                 clean = true;
+				GameController.cleanTiles++;
             }
 		}
     }
@@ -36,13 +36,11 @@ public class TileCode : MonoBehaviour {
         if (other.tag == "Player")
         {
             playerTouching = true;
-            Debug.Log("PLAY Touched");
         }
         if (other.tag == "Enemy")
         {
             enemyTouching = true;
             rend.material.color = Color.grey;
-            Debug.Log("CAT Touched");
         }
 	}
 

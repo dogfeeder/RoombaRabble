@@ -29,7 +29,6 @@ public class healthscript : MonoBehaviour {
 			currentTime += Time.deltaTime;
 			Debug.Log (currentTime);
 			if (currentTime > timeBetweenAttacks) {
-				Debug.Log ("Done");
 				triggered = false;
 				currentTime = 0;
 			}
@@ -41,13 +40,13 @@ public class healthscript : MonoBehaviour {
 			currentHealth -= amount;
 		}
 		if (currentHealth <= 0) {
-			Debug.Log ("player is dead");
+			GameController.RestartGame ();
+
 		}
 	}
 
 	void OnTriggerEnter (Collider other){
 		if (!triggered) {
-			Debug.Log (triggered);
 			if (other.gameObject == enemy) {
 				triggered = true;
 				TakeDamage(1);
