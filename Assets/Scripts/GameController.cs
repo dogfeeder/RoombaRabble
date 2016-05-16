@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -31,8 +31,8 @@ public class GameController : MonoBehaviour {
 	}
 		
 	public static void RestartGame() {
-		Scene scene = SceneManager.GetActiveScene();
-		SceneManager.LoadScene(scene.name);
+		//Scene scene = SceneManager.GetActiveScene();
+		//SceneManager.LoadScene(scene.name);
 	}
 		
 }
