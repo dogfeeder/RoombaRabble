@@ -39,7 +39,12 @@ public class TileCode : MonoBehaviour {
         }
         if (other.tag == "Enemy")
         {
+            if (clean)
+            {
+                GameController.cleanTiles--;
+            }
             enemyTouching = true;
+            clean = false;
             rend.material.color = Color.grey;
         }
 	}

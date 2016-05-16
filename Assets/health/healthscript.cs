@@ -13,10 +13,10 @@ public class healthscript : MonoBehaviour {
 	public float currentTime = 0;
 	public bool triggered;
 
+    public GameObject loseGUI;
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		currentHealth = startingHealth;
 		enemy = GameObject.FindGameObjectWithTag ("Enemy");
 	}
@@ -27,7 +27,6 @@ public class healthscript : MonoBehaviour {
 
 		if (triggered) {
 			currentTime += Time.deltaTime;
-			Debug.Log (currentTime);
 			if (currentTime > timeBetweenAttacks) {
 				triggered = false;
 				currentTime = 0;
@@ -40,9 +39,10 @@ public class healthscript : MonoBehaviour {
 			currentHealth -= amount;
 		}
 		if (currentHealth <= 0) {
-			GameController.RestartGame ();
+            loseGUI.SetActive(true);
+            Time.timeScale = 0;
 
-		}
+        }
 	}
 
 	void OnTriggerEnter (Collider other){

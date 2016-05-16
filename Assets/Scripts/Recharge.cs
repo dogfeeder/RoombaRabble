@@ -6,7 +6,6 @@ public class Recharge : MonoBehaviour {
 	public GameObject AI;
 
 	public bool charging;
-	private GameObject collision;
     public GameObject player;
 
 	// Use this for initialization
@@ -19,7 +18,7 @@ public class Recharge : MonoBehaviour {
 		if (charging) {
             if (player.GetComponent<CharacterControllercs>().energy < 100.0f)
             {
-                player.GetComponent<CharacterControllercs>().energy += 0.1f;
+                player.GetComponent<CharacterControllercs>().energy += 0.2f;
             }
 		}
 	}

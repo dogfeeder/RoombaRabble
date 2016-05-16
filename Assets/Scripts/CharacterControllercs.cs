@@ -12,7 +12,7 @@ public class CharacterControllercs : MonoBehaviour {
 	
 	//Movement speeds
 	private float gravity = 20.0f;					//Gravity for jump
-	private float runSpeed = 10.0f;					//Speed when the Character is running
+	private float runSpeed = 6.0f;					//Speed when the Character is running
 	private float walkSpeed = 4.0f;					//Speed when the Character is walking (normal movement)
 	private float rotateSpeed = 120.0f;				//Rotationspeed of the Character
 	private float walkBackMod = 0.75f;				//Speed in Percent for walk backwards and sidewalk
@@ -100,9 +100,15 @@ public class CharacterControllercs : MonoBehaviour {
             if (moveDirection.x < 0)
                 moveStatus = isWalking ? "sidewalking_l" : "siderunning_l";
 
-            if (moveStatus != "idle")
+            if (moveStatus != "idle" && energy > 0)
             {
-                energy -= 0.05f;
+                if (moveStatus == "walking")
+                {
+                    energy -= 0.05f;
+                } else if (moveStatus == "running")
+                {
+                    energy -= 0.1f;
+                }
             }
 
 

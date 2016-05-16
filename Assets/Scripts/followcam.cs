@@ -4,19 +4,19 @@ using System.Collections;
 public class FollowCam : MonoBehaviour {
 
     public GameObject target;                           // Target to follow
-    public float targetHeight = 1.7f;                         // Vertical offset adjustment
-    public float distance = 12.0f;                            // Default Distance
-    public float offsetFromWall = 0.1f;                       // Bring camera away from any colliding objects
-    public float maxDistance = 20f;                       // Maximum zoom Distance
-    public float minDistance = 0.6f;                      // Minimum zoom Distance
-    public float xSpeed = 200.0f;                             // Orbit speed (Left/Right)
-    public float ySpeed = 200.0f;                             // Orbit speed (Up/Down)
-    public float yMinLimit = -80f;                            // Looking up limit
-    public float yMaxLimit = 80f;                             // Looking down limit
-    public float zoomRate = 40f;                          // Zoom Speed
-    public float rotationDampening = 3.0f;                // Auto Rotation speed (higher = faster)
-    public float zoomDampening = 5.0f;                    // Auto Zoom speed (Higher = faster)
-    public LayerMask collisionLayers = -1;     // What the camera will collide with
+    public float targetHeight = 1.7f;                   // Vertical offset adjustment
+    public float distance = 12.0f;                      // Default Distance
+    public float offsetFromWall = 0.1f;                 // Bring camera away from any colliding objects
+    public float maxDistance = 20f;                     // Maximum zoom Distance
+    public float minDistance = 0.6f;                    // Minimum zoom Distance
+    public float xSpeed = 200.0f;                       // Orbit speed (Left/Right)
+    public float ySpeed = 200.0f;                       // Orbit speed (Up/Down)
+    public float yMinLimit = -80f;                      // Looking up limit
+    public float yMaxLimit = 80f;                       // Looking down limit
+    public float zoomRate = 40f;                        // Zoom Speed
+    public float rotationDampening = 3.0f;              // Auto Rotation speed (higher = faster)
+    public float zoomDampening = 5.0f;                  // Auto Zoom speed (Higher = faster)
+    public LayerMask collisionLayers = -1;              // What the camera will collide with
     public bool lockToRearOfTarget = false;             // Lock camera to rear of target
     public bool allowMouseInputX = true;                // Allow player to control camera angle on the X axis (Left/Right)
     public bool allowMouseInputY = true;                // Allow player to control camera angle on the Y axis (Up/Down)
@@ -27,8 +27,6 @@ public class FollowCam : MonoBehaviour {
     private float desiredDistance;
     private float correctedDistance;
     private bool rotateBehind = false;
-    private float pbuffer = 0.0f;       //Cooldownpuffer for SideButtons
-    private float coolDown = 0.5f;      //Cooldowntime for SideButtons 
 
     void Start()
     {
@@ -51,7 +49,6 @@ public class FollowCam : MonoBehaviour {
         if (target == null)
         {
             target = GameObject.FindGameObjectWithTag("Player") as GameObject;
-            Debug.Log("Looking for Player");
         }
 
     }
@@ -62,10 +59,6 @@ public class FollowCam : MonoBehaviour {
         // Don't do anything if target is not defined
         if (target == null)
             return;
-        //pushbuffer
-        if (pbuffer > 0)
-            pbuffer -= Time.deltaTime;
-        if (pbuffer < 0) pbuffer = 0;
 
 
         Vector3 vTargetOffset;
