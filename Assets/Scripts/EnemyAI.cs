@@ -6,9 +6,11 @@ public class EnemyAI : MonoBehaviour {
 	private Transform myTransform;
 
 	private NavMeshAgent agent;
+    public bool attack;
+    public GameObject player;
 
-	//Patrol points
-	public GameObject[] patrolPoints;
+    //Patrol points
+    public GameObject[] patrolPoints;
 	public int currentPatrolPoint = 0;
 	private float patrolPointDistance = 1.0f;
 
@@ -23,7 +25,15 @@ public class EnemyAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		CyclePatrolling();
+        if (attack)
+        {
+            GetComponent<NavMeshAgent>().destination = player.transform.position;
+        }
+        else
+        {
+
+            CyclePatrolling();
+        }
 	}
 
 	//In-order patrol technique: will patrol points in sequence, looping back to the first at the end

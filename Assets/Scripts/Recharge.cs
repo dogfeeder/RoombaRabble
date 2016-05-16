@@ -25,7 +25,7 @@ public class Recharge : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other) {
 		charging = true;
-		AI.GetComponent<AIScript> ().active = true;
+		AI.GetComponent<EnemyAI> ().attack = true;
 	}
 
 	private void OnTriggerExit(Collider other) {

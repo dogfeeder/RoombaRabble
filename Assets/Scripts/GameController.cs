@@ -20,7 +20,8 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		cleanTiles = 0;
+        Time.timeScale = 1;
+        cleanTiles = 0;
 		tiles = GameObject.FindGameObjectsWithTag ("tile");
         totalTiles = tiles.Length;
         tileCount = tiles.Length;
@@ -57,9 +58,9 @@ public class GameController : MonoBehaviour {
 	}
 	//Restart Game
 	public void RestartGame() {
-		Scene scene = SceneManager.GetActiveScene();
-		SceneManager.LoadScene(scene.name);
         Time.timeScale = 1;
+        Scene scene = SceneManager.GetActiveScene();
+		SceneManager.LoadScene(scene.name);
     }
 		
 }

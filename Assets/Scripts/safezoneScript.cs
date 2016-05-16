@@ -13,7 +13,7 @@ public class safezoneScript : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other) {
 		if(other.tag == "Player"){
-			AI.GetComponent<AIScript> ().active = false;
+			AI.GetComponent<EnemyAI> ().attack = false;
 			Debug.Log ("AI chase off");
 		}
 	}
