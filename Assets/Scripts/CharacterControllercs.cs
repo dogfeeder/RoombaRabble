@@ -25,12 +25,34 @@ public class CharacterControllercs : MonoBehaviour {
 	private CharacterController controller;			//CharacterController for movement
 
     public float energy = 100;
-
     public Slider energySlider;
+    public RectTransform sliderFill;
+
+    void Start()
+    {
+        energySlider.value = energy;
+    }
 	
 	//Every Frame
     void Update()
     {
+        //update GUI
+        energySlider.value = energy;
+
+        //movement speed if energy available
+        if (energy > 10)
+        {
+            walkSpeed = 4.0f;
+            runSpeed = 6.0f;
+            sliderFill.GetComponent<Image>().color = new Color(0.000f, 0.926f, 0.160f, 1.000f);
+        }
+        else
+        {
+            walkSpeed = 1.0f;
+            runSpeed = 1.5f;
+            sliderFill.GetComponent<Image>().color = Color.red;
+        }
+
         //Set idel animation
         moveStatus = "idle";
         isWalking = true;
@@ -77,6 +99,11 @@ public class CharacterControllercs : MonoBehaviour {
                 moveStatus = isWalking ? "sidewalking_r" : "siderunning_r";
             if (moveDirection.x < 0)
                 moveStatus = isWalking ? "sidewalking_l" : "siderunning_l";
+
+            if (moveStatus != "idle")
+            {
+                energy -= 0.05f;
+            }
 
 
             //transform direction
