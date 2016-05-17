@@ -28,9 +28,13 @@ public class CharacterControllercs : MonoBehaviour {
     public Slider energySlider;
     public RectTransform sliderFill;
 
+	private CharacterController c;
+
     void Start()
     {
         energySlider.value = energy;
+		c = GetComponent<CharacterController>();
+		c.detectCollisions = false;
     }
 	
 	//Every Frame

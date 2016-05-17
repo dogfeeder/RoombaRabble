@@ -2,9 +2,10 @@
 using System.Collections;
 
 public class safezoneScript : MonoBehaviour {
-	public GameObject AI;
+	private GameObject AI;
 	// Use this for initialization
 	void Start () {
+		AI = GameObject.FindGameObjectWithTag ("Enemy");
 	}
 	
 	// Update is called once per frame
