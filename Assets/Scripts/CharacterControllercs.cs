@@ -28,6 +28,8 @@ public class CharacterControllercs : MonoBehaviour {
     public Slider energySlider;
     public RectTransform sliderFill;
 
+	public GameObject loseGUI;
+
 	private CharacterController c;
 
     void Start()
@@ -44,18 +46,18 @@ public class CharacterControllercs : MonoBehaviour {
         energySlider.value = energy;
 
         //movement speed if energy available
-        if (energy > 10)
-        {
-            walkSpeed = 4.0f;
-            runSpeed = 6.0f;
-            sliderFill.GetComponent<Image>().color = new Color(0.000f, 0.926f, 0.160f, 1.000f);
-        }
-        else
-        {
-            walkSpeed = 1.0f;
-            runSpeed = 1.5f;
-            sliderFill.GetComponent<Image>().color = Color.red;
-        }
+		if (energy > 10) {
+			walkSpeed = 4.0f;
+			runSpeed = 6.0f;
+			sliderFill.GetComponent<Image> ().color = new Color (0.000f, 0.926f, 0.160f, 1.000f);
+		} else if (energy > 0) {
+			walkSpeed = 1.0f;
+			runSpeed = 1.5f;
+			sliderFill.GetComponent<Image> ().color = Color.red;
+		} else {
+			loseGUI.SetActive(true);
+			Time.timeScale = 0;
+		}
 
         //Set idel animation
         moveStatus = "idle";

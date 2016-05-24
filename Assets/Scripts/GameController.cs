@@ -47,7 +47,10 @@ public class GameController : MonoBehaviour {
         //Finding Tiles
         tiles = GameObject.FindGameObjectsWithTag("tile");
 		tileCount = tiles.Length - cleanTiles;
-		tileCountText.text = "Tiles Left: " + tileCount.ToString() + "/" + totalTiles.ToString ();
+		//tileCountText.text = "Tiles Left: " + tileCount.ToString() + "/" + totalTiles.ToString ();
+		float percentageCalc = 100 - (float)tileCount / (float)totalTiles * 100;
+		percentageCalc = Mathf.Floor (percentageCalc);
+		tileCountText.text = "Cleanliness: " + percentageCalc.ToString() + "%";
 
 		if (cleanTiles == totalTiles) {
             winGUI.SetActive(true);
