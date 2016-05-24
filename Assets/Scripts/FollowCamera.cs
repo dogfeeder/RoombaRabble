@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FollowCam : MonoBehaviour {
+public class FollowCamera : MonoBehaviour {
 
     public GameObject target;                           // Target to follow
     public float targetHeight = 1.7f;                   // Vertical offset adjustment
