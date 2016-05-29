@@ -44,7 +44,6 @@ public class TileCode : MonoBehaviour {
             if (!triggered)
             {
                 int random = Random.Range(0, 10000);
-                Debug.Log(random);
                 if (random < 50)
                 {
                     if (clean)

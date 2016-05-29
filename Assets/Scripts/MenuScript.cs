@@ -34,12 +34,17 @@ public class MenuScript : MonoBehaviour {
 	}
 
 	public void StartLevel (){
-		//Application.LoadLevel (1);
-		SceneManager.LoadScene (1);
+		SceneManager.LoadScene(1);
 
 	}
 
-	public void ExitGame(){
+    public void Prototype()
+    {
+        SceneManager.LoadScene(2);
+
+    }
+
+    public void ExitGame(){
 		Application.Quit ();
 	}
 }
