@@ -14,12 +14,17 @@ public class EnemyAI : MonoBehaviour {
 	public int currentPatrolPoint = 0;
 	private float patrolPointDistance = 1.0f;
 
+    AudioSource audioSource;
+    public AudioClip meow;
+    private bool played;
+
 	// Use this for initialization
 	void Start () {
 
 		myTransform = this.transform;
 
 		agent = GetComponentInChildren<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -28,11 +33,16 @@ public class EnemyAI : MonoBehaviour {
         if (attack)
         {
             GetComponent<NavMeshAgent>().destination = player.transform.position;
+            if (!played) {
+                audioSource.PlayOneShot(meow, 1.0f);
+                played = true;
+            }
         }
         else
         {
 
             CyclePatrolling();
+            played = false;
         }
 	}
 

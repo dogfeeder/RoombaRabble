@@ -32,11 +32,17 @@ public class CharacterControllercs : MonoBehaviour {
 
 	private CharacterController c;
 
+    private AudioSource audioSource;
+    public AudioClip buzz;
+    private bool isPlaying;
+
     void Start()
     {
         energySlider.value = energy;
 		c = GetComponent<CharacterController>();
 		c.detectCollisions = false;
+        audioSource = GetComponent<AudioSource>();
+
     }
 	
 	//Every Frame
@@ -46,13 +52,17 @@ public class CharacterControllercs : MonoBehaviour {
         energySlider.value = energy;
 
         //movement speed if energy available
-		if (energy > 10) {
-			walkSpeed = 4.0f;
-			runSpeed = 6.0f;
-			sliderFill.GetComponent<Image> ().color = new Color (0.000f, 0.926f, 0.160f, 1.000f);
-		} else if (energy > 0) {
-			walkSpeed = 1.0f;
-			runSpeed = 1.5f;
+        if (energy > 50) {
+            walkSpeed = 4.0f;
+            runSpeed = 6.0f;
+            sliderFill.GetComponent<Image>().color = new Color(0.000f, 0.926f, 0.160f, 1.000f);
+        } else if (energy > 10) {
+            walkSpeed = 4.0f;
+            runSpeed = 6.0f;
+            sliderFill.GetComponent<Image>().color = new Color(0.926f, 0.709f, 0.000f, 1.000f);
+        } else if (energy > 0) {
+			walkSpeed = 2.0f;
+			runSpeed = 3.0f;
 			sliderFill.GetComponent<Image> ().color = Color.red;
 		} else {
 			loseGUI.SetActive(true);
@@ -108,6 +118,12 @@ public class CharacterControllercs : MonoBehaviour {
 
             if (moveStatus != "idle" && energy > 0)
             {
+                if (!isPlaying)
+                {
+                    audioSource.clip = buzz;
+                    audioSource.Play();
+                    isPlaying = true;
+                }
                 if (moveStatus == "walking")
                 {
                     energy -= 0.05f;
@@ -115,6 +131,10 @@ public class CharacterControllercs : MonoBehaviour {
                 {
                     energy -= 0.1f;
                 }
+            } else
+            {
+                audioSource.Stop();
+                isPlaying = false;
             }
 
 
