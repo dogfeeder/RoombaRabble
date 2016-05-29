@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour {
     public bool gameOver;
 
     public AudioClip win;
+    private bool played = false;
 
     private int totalTiles;
 
@@ -56,7 +57,12 @@ public class GameController : MonoBehaviour {
 
 		if (cleanTiles == totalTiles) {
             winGUI.SetActive(true);
-            GetComponent<AudioSource>().PlayOneShot(win, 1.0f);
+            if (!played)
+            {
+                GetComponent<AudioSource>().PlayOneShot(win, 1.0f);
+                GameObject.Find("Player").GetComponent<AudioSource>().Stop();
+                played = true;
+            }
             gameOver = true;
             Time.timeScale = 0;
 		}

@@ -126,10 +126,10 @@ public class CharacterControllercs : MonoBehaviour {
                 }
                 if (moveStatus == "walking")
                 {
-                    energy -= 0.05f;
+                    energy -= 0.03f;
                 } else if (moveStatus == "running")
                 {
-                    energy -= 0.1f;
+                    energy -= 0.06f;
                 }
             } else
             {
