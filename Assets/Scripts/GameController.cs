@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour {
     public float timer = 0;
     public bool gameOver;
 
+    public AudioClip win;
+
     private int totalTiles;
 
     // Use this for initialization
@@ -54,6 +56,7 @@ public class GameController : MonoBehaviour {
 
 		if (cleanTiles == totalTiles) {
             winGUI.SetActive(true);
+            GetComponent<AudioSource>().PlayOneShot(win, 1.0f);
             gameOver = true;
             Time.timeScale = 0;
 		}

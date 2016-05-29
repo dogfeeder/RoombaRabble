@@ -42,6 +42,7 @@ public class CharacterControllercs : MonoBehaviour {
 		c = GetComponent<CharacterController>();
 		c.detectCollisions = false;
         audioSource = GetComponent<AudioSource>();
+        audioSource.clip = buzz;
 
     }
 	
@@ -120,7 +121,6 @@ public class CharacterControllercs : MonoBehaviour {
             {
                 if (!isPlaying)
                 {
-                    audioSource.clip = buzz;
                     audioSource.Play();
                     isPlaying = true;
                 }

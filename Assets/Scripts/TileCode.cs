@@ -12,6 +12,8 @@ public class TileCode : MonoBehaviour {
     private bool enemyTouching;
 	public bool clean;
 
+    public bool triggered;
+
 	// Use this for initialization
 	void Start () {
 		rend = GetComponent<Renderer>();
@@ -39,13 +41,21 @@ public class TileCode : MonoBehaviour {
         }
         if (other.tag == "Enemy")
         {
-            if (clean)
+            if (!triggered)
             {
-                GameController.cleanTiles--;
+                int random = Random.Range(0, 10000);
+                Debug.Log(random);
+                if (random < 50)
+                {
+                    if (clean)
+                    {
+                        GameController.cleanTiles--;
+                    }
+                    enemyTouching = true;
+                    clean = false;
+                    rend.material.color = Color.grey;
+                }
             }
-            enemyTouching = true;
-            clean = false;
-            rend.material.color = Color.grey;
         }
 	}
 

@@ -13,6 +13,9 @@ public class healthscript : MonoBehaviour {
 	public float currentTime = 0;
 	public bool triggered;
 
+    public AudioClip meow;
+    public AudioClip dead;
+
     public GameObject loseGUI;
 
     // Use this for initialization
@@ -40,6 +43,7 @@ public class healthscript : MonoBehaviour {
 		}
 		if (currentHealth <= 0) {
             loseGUI.SetActive(true);
+            enemy.GetComponent<AudioSource>().PlayOneShot(dead, 1.0f);
             Time.timeScale = 0;
 
         }
@@ -49,6 +53,7 @@ public class healthscript : MonoBehaviour {
 		if (!triggered) {
 			if (other.gameObject == enemy) {
 				triggered = true;
+                enemy.GetComponent<AudioSource>().PlayOneShot(meow,1.0f);
 				TakeDamage(1);
 			}
 		}
