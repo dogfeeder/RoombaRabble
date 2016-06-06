@@ -7,7 +7,6 @@ public class EnemyAI : MonoBehaviour {
 	private Transform myTransform;
 
 	private NavMeshAgent agent;
-    public bool attack;
 
     //Patrol points
     public GameObject[] patrolPoints;
@@ -24,6 +23,8 @@ public class EnemyAI : MonoBehaviour {
     [SerializeField]
     Transform lineOfSightEnd;
     Transform player; // a reference to the player for raycasting
+    public bool canSee;
+    public bool attack;
 
     // Use this for initialization
     void Start () {
@@ -40,12 +41,12 @@ public class EnemyAI : MonoBehaviour {
         if (CanPlayerBeSeen())
         {
             Debug.Log("I can see!!!!");
-            attack = true;
-        }
+            canSee = true;
+}
 
         else
         {
-            attack = false;
+            canSee = false;
         }
 
     }
@@ -53,7 +54,7 @@ public class EnemyAI : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        if (attack)
+        if (attack || canSee)
         {
             GetComponent<NavMeshAgent>().destination = player.transform.position;
             if (!played) {

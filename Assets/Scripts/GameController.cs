@@ -25,6 +25,10 @@ public class GameController : MonoBehaviour {
     private float winPercentage;
     private float percentageCalc;
 
+    public AudioClip clickSound;
+    public GameObject clickControl;
+    private AudioSource clickAS;
+
     private int totalTiles;
 
     // Use this for initialization
@@ -35,6 +39,8 @@ public class GameController : MonoBehaviour {
         totalTiles = tiles.Length;
         tileCount = tiles.Length;
 		tileCountText.text = tileCount.ToString();
+
+        clickAS = clickControl.GetComponent<AudioSource>();
 
         switch (difficulty)
         {
@@ -128,5 +134,10 @@ public class GameController : MonoBehaviour {
         menuGUI.SetActive(false);
         showingMainMenu = false;
         Time.timeScale = 1;
+    }
+
+    public void ClickSound()
+    {
+        clickAS.PlayOneShot(clickSound, 1.0f);
     }
 }

@@ -10,6 +10,10 @@ public class MenuScript : MonoBehaviour {
 
     public GameObject difficultyMenu;
 
+    public AudioClip clickSound;
+    public GameObject clickControl;
+    private AudioSource clickAS;
+
     private int difficulty;
 	// Use this for initialization
 	void Start () {
@@ -17,6 +21,7 @@ public class MenuScript : MonoBehaviour {
 		startText = startText.GetComponent<Button> ();
 		exitText = exitText.GetComponent<Button> ();
 		quitMenu.enabled = false;
+        clickAS = clickControl.GetComponent<AudioSource>();
 	
 	}
 	
@@ -24,6 +29,11 @@ public class MenuScript : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void ClickSound()
+    {
+        clickAS.PlayOneShot(clickSound, 1.0f);
+    }
 
     public void showDifficultyMenu()
     {
