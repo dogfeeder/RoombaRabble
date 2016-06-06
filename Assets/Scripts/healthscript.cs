@@ -9,7 +9,7 @@ public class healthscript : MonoBehaviour {
 	public int startingHealth = 3;
 	public int currentHealth;
 	GameObject enemy;
-	public float timeBetweenAttacks = 1.0f;
+	public float timeBetweenAttacks = 2.0f;
 	public float currentTime = 0;
 	public bool triggered;
 

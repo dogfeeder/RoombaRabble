@@ -7,6 +7,10 @@ public class MenuScript : MonoBehaviour {
 	public Canvas quitMenu;
 	public Button startText;
 	public Button exitText;
+
+    public GameObject difficultyMenu;
+
+    private int difficulty;
 	// Use this for initialization
 	void Start () {
 		quitMenu = quitMenu.GetComponent<Canvas> ();
@@ -21,6 +25,22 @@ public class MenuScript : MonoBehaviour {
 	
 	}
 
+    public void showDifficultyMenu()
+    {
+        difficultyMenu.SetActive(true);
+    }
+
+    public void hideDifficultyMenu()
+    {
+        difficultyMenu.SetActive(false);
+    }
+
+    public void setDifficulty(int diff)
+    {
+        difficulty = diff;
+        StartLevel();
+    }
+
 	public void ExitPress(){
 		quitMenu.enabled = true;
 		startText.enabled = false;
@@ -34,15 +54,10 @@ public class MenuScript : MonoBehaviour {
 	}
 
 	public void StartLevel (){
+        GameController.difficulty = difficulty;
 		SceneManager.LoadScene(1);
 
 	}
-
-    public void Prototype()
-    {
-        SceneManager.LoadScene(2);
-
-    }
 
     public void ExitGame(){
 		Application.Quit ();

@@ -39,12 +39,16 @@ public class GameController : MonoBehaviour {
         switch (difficulty)
         {
             case 1:
+                winPercentage = 60f;
                 break;
             case 2:
+                winPercentage = 80f;
                 break;
             case 3:
+                winPercentage = 100f;
                 break;
             default:
+                winPercentage = 60f;
                 break;
         }
 	}
@@ -86,7 +90,7 @@ public class GameController : MonoBehaviour {
 		percentageCalc = Mathf.Floor (percentageCalc);
 		tileCountText.text = percentageCalc.ToString() + "% Clean";
 
-		if (cleanTiles == totalTiles) {
+		if (percentageCalc >= winPercentage) {
             winGUI.SetActive(true);
             if (!played)
             {
@@ -125,5 +129,4 @@ public class GameController : MonoBehaviour {
         showingMainMenu = false;
         Time.timeScale = 1;
     }
-
 }
