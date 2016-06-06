@@ -39,7 +39,7 @@ public class TileCode : MonoBehaviour {
         {
             playerTouching = true;
         }
-        if (other.tag == "Enemy")
+        if (other.tag == "CatHit")
         {
             if (!triggered)
             {

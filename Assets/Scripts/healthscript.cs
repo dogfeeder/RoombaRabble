@@ -51,7 +51,7 @@ public class healthscript : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other){
 		if (!triggered) {
-			if (other.gameObject == enemy) {
+			if (other.gameObject.tag == "CatHit") {
 				triggered = true;
                 enemy.GetComponent<AudioSource>().PlayOneShot(catAttack, 1.0f);
 				TakeDamage(1);

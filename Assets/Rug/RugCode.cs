@@ -53,7 +53,7 @@ public class RugCode : MonoBehaviour {
 				playerTouching = true;
 			}
 		}
-		if (other.tag == "Enemy")
+		if (other.tag == "CatHit")
 		{
 			if (clean)
 			{
