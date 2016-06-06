@@ -8,9 +8,12 @@ public class Recharge : MonoBehaviour {
 	public bool charging;
     public GameObject player;
 
+    private AudioSource audioSource;
+    public AudioClip beep;
+
 	// Use this for initialization
 	void Start () {
-	
+        audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -24,11 +27,18 @@ public class Recharge : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other) {
-		charging = true;
-		AI.GetComponent<EnemyAI> ().attack = true;
+        if (other.tag == "Player")
+        {
+            audioSource.PlayOneShot(beep, 1.0f);
+            charging = true;
+            AI.GetComponent<EnemyAI>().attack = true;
+        }
 	}
 
 	private void OnTriggerExit(Collider other) {
-		charging = false;
+        if (other.tag == "Player")
+        {
+            charging = false;
+        }
 	}
 }

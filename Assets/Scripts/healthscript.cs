@@ -13,7 +13,7 @@ public class healthscript : MonoBehaviour {
 	public float currentTime = 0;
 	public bool triggered;
 
-    public AudioClip meow;
+    public AudioClip catAttack;
     public AudioClip dead;
 
     public GameObject loseGUI;
@@ -53,7 +53,7 @@ public class healthscript : MonoBehaviour {
 		if (!triggered) {
 			if (other.gameObject == enemy) {
 				triggered = true;
-                enemy.GetComponent<AudioSource>().PlayOneShot(meow,1.0f);
+                enemy.GetComponent<AudioSource>().PlayOneShot(catAttack, 1.0f);
 				TakeDamage(1);
 			}
 		}

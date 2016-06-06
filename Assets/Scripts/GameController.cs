@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
+    public static int difficulty;
+
 	public GameObject[] tiles;
 	public static int tileCount = 0;
 	public static int cleanTiles = 0;
 	public Text tileCountText;
 
     public GameObject winGUI;
+    public GameObject menuGUI;
     public Text timerGUI;
     public Text timeTakenGUI;
     public float timer = 0;
@@ -18,6 +21,9 @@ public class GameController : MonoBehaviour {
 
     public AudioClip win;
     private bool played = false;
+    private bool showingMainMenu;
+    private float winPercentage;
+    private float percentageCalc;
 
     private int totalTiles;
 
@@ -29,10 +35,35 @@ public class GameController : MonoBehaviour {
         totalTiles = tiles.Length;
         tileCount = tiles.Length;
 		tileCountText.text = tileCount.ToString();
+
+        switch (difficulty)
+        {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+                break;
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        //MainMenu showing
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (showingMainMenu)
+            {
+                hideMainMenu();
+            }
+            else
+            {
+                showMainMenu();
+            }
+        }
 
         //Timer Stuff
         string minutes = Mathf.Floor(timer / 60).ToString("00");
@@ -51,9 +82,9 @@ public class GameController : MonoBehaviour {
         tiles = GameObject.FindGameObjectsWithTag("tile");
 		tileCount = tiles.Length - cleanTiles;
 		//tileCountText.text = "Tiles Left: " + tileCount.ToString() + "/" + totalTiles.ToString ();
-		float percentageCalc = 100 - (float)tileCount / (float)totalTiles * 100;
+		percentageCalc = 100 - (float)tileCount / (float)totalTiles * 100;
 		percentageCalc = Mathf.Floor (percentageCalc);
-		tileCountText.text = "Cleanliness: " + percentageCalc.ToString() + "%";
+		tileCountText.text = percentageCalc.ToString() + "% Clean";
 
 		if (cleanTiles == totalTiles) {
             winGUI.SetActive(true);
@@ -80,5 +111,19 @@ public class GameController : MonoBehaviour {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
-		
+
+    public void showMainMenu()
+    {
+        menuGUI.SetActive(true);
+        showingMainMenu = true;
+        Time.timeScale = 0;
+    }
+
+    public void hideMainMenu()
+    {
+        menuGUI.SetActive(false);
+        showingMainMenu = false;
+        Time.timeScale = 1;
+    }
+
 }

@@ -124,12 +124,14 @@ public class CharacterControllercs : MonoBehaviour {
                     audioSource.Play();
                     isPlaying = true;
                 }
-                if (moveStatus == "walking")
+                if (moveStatus == "running")
                 {
-                    energy -= 0.03f;
-                } else if (moveStatus == "running")
+                    energy -= 0.08f;
+                } else if (moveStatus == "idle") {
+
+                } else
                 {
-                    energy -= 0.06f;
+                    energy -= 0.04f;
                 }
             } else
             {
