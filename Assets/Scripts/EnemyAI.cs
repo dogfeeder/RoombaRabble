@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class EnemyAI : MonoBehaviour {
 
-	private Transform myTransform;
-
 	private NavMeshAgent agent;
 
     //Patrol points
@@ -22,7 +20,8 @@ public class EnemyAI : MonoBehaviour {
 
     [SerializeField]
     Transform lineOfSightEnd;
-    Transform player; // a reference to the player for raycasting
+    public GameObject player;
+    Transform playerTransform; // a reference to the player for raycasting
     public bool canSee;
     public bool attack;
 
@@ -33,7 +32,7 @@ public class EnemyAI : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
 
         playerInRange = false;
-        player = GameObject.Find("Player").transform;
+        playerTransform = player.transform;
     }
 
     void FixedUpdate()
@@ -58,8 +57,11 @@ public class EnemyAI : MonoBehaviour {
         {
             GetComponent<NavMeshAgent>().destination = player.transform.position;
             if (!played) {
-                audioSource.PlayOneShot(meow, 1.0f);
-                played = true;
+                if (attack)
+                {
+                    audioSource.PlayOneShot(meow, 1.0f);
+                    played = true;
+                }
             }
         }
         else
@@ -88,13 +90,19 @@ public class EnemyAI : MonoBehaviour {
 
     bool CanPlayerBeSeen()
     {
+        Debug.Log("PlayerCanBeSeen1");
         // we only need to check visibility if the player is within the enemy's visual range
         if (playerInRange)
         {
             if (PlayerInFieldOfView())
+            {
+                Debug.Log("In Field of View");
                 return (!PlayerHiddenByObstacles());
+            }
             else
+            {
                 return false;
+            }
 
         }
         else
@@ -129,8 +137,8 @@ public class EnemyAI : MonoBehaviour {
 
         // find the angle between the enemy's 'forward' direction and the player's location and return true if it's within 65 degrees (for 130 degree field of view)
 
-        Vector3 directionToPlayer = player.position - transform.position; // represents the direction from the enemy to the player    
-        Debug.DrawLine(transform.position, player.position, Color.magenta); // a line drawn in the Scene window equivalent to directionToPlayer
+        Vector3 directionToPlayer = playerTransform.position - transform.position; // represents the direction from the enemy to the player    
+        Debug.DrawLine(transform.position, playerTransform.position, Color.magenta); // a line drawn in the Scene window equivalent to directionToPlayer
 
         Vector3 lineOfSight = lineOfSightEnd.position - transform.position; // the centre of the enemy's field of view, the direction of looking directly ahead
         Debug.DrawLine(transform.position, lineOfSightEnd.position, Color.red); // a line drawn in the Scene window equivalent to the enemy's field of view centre
@@ -148,9 +156,9 @@ public class EnemyAI : MonoBehaviour {
     bool PlayerHiddenByObstacles()
     {
 
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, player.position - transform.position, distanceToPlayer);
-        Debug.DrawRay(transform.position, player.position - transform.position, Color.blue); // draw line in the Scene window to show where the raycast is looking
+        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, playerTransform.position - transform.position, distanceToPlayer);
+        Debug.DrawRay(transform.position, playerTransform.position - transform.position, Color.blue); // draw line in the Scene window to show where the raycast is looking
         List<float> distances = new List<float>();
 
         foreach (RaycastHit hit in hits)

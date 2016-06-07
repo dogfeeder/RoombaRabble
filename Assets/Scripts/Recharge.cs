@@ -19,7 +19,7 @@ public class Recharge : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (charging) {
-            if (player.GetComponent<CharacterControllercs>().energy < 100.0f)
+            if (player.GetComponent<CharacterControllercs>().energy < 99.9f)
             {
                 player.GetComponent<CharacterControllercs>().energy += 0.2f;
             }

@@ -4,6 +4,7 @@
 /// </summary>
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class CharacterControllercs : MonoBehaviour {
 			
@@ -26,6 +27,7 @@ public class CharacterControllercs : MonoBehaviour {
 
     public float energy = 100;
     public Slider energySlider;
+    public Text energyText;
     public RectTransform sliderFill;
 
 	public GameObject loseGUI;
@@ -39,6 +41,7 @@ public class CharacterControllercs : MonoBehaviour {
     void Start()
     {
         energySlider.value = energy;
+        energyText.text = "Energy: " + energy + "%";
 		c = GetComponent<CharacterController>();
 		c.detectCollisions = false;
         audioSource = GetComponent<AudioSource>();
@@ -51,6 +54,7 @@ public class CharacterControllercs : MonoBehaviour {
     {
         //update GUI
         energySlider.value = energy;
+        energyText.text = "Energy: " + Math.Round(energy,1) + "%";
 
         //movement speed if energy available
         if (energy > 50) {
