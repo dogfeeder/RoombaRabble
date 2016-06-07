@@ -48,31 +48,43 @@ public class CharacterControllercs : MonoBehaviour {
         audioSource.clip = buzz;
 
     }
-	
-	//Every Frame
-    void Update()
+    
+    void FixedUpdate()
     {
         //update GUI
         energySlider.value = energy;
-        energyText.text = "Energy: " + Math.Round(energy,1) + "%";
+        energyText.text = "Energy: " + Math.Round(energy, 1) + "%";
 
         //movement speed if energy available
-        if (energy > 50) {
+        if (energy > 50)
+        {
             walkSpeed = 4.0f;
             runSpeed = 6.0f;
             sliderFill.GetComponent<Image>().color = new Color(0.000f, 0.926f, 0.160f, 1.000f);
-        } else if (energy > 10) {
+        }
+        else if (energy > 10)
+        {
             walkSpeed = 4.0f;
             runSpeed = 6.0f;
             sliderFill.GetComponent<Image>().color = new Color(0.926f, 0.709f, 0.000f, 1.000f);
-        } else if (energy > 0) {
-			walkSpeed = 2.0f;
-			runSpeed = 3.0f;
-			sliderFill.GetComponent<Image> ().color = Color.red;
-		} else {
-			loseGUI.SetActive(true);
-			Time.timeScale = 0;
-		}
+        }
+        else if (energy > 0)
+        {
+            walkSpeed = 2.0f;
+            runSpeed = 3.0f;
+            sliderFill.GetComponent<Image>().color = Color.red;
+        }
+        else
+        {
+            loseGUI.SetActive(true);
+            Time.timeScale = 0;
+            Cursor.visible = true;
+        }
+    }
+
+    //Every Frame
+    void Update()
+    {
 
         //Set idel animation
         moveStatus = "idle";

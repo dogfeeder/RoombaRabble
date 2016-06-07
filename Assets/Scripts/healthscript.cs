@@ -45,6 +45,7 @@ public class healthscript : MonoBehaviour {
             loseGUI.SetActive(true);
             enemy.GetComponent<AudioSource>().PlayOneShot(dead, 1.0f);
             Time.timeScale = 0;
+            Cursor.visible = true;
 
         }
 	}

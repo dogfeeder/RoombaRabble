@@ -90,7 +90,6 @@ public class EnemyAI : MonoBehaviour {
 
     bool CanPlayerBeSeen()
     {
-        Debug.Log("PlayerCanBeSeen1");
         // we only need to check visibility if the player is within the enemy's visual range
         if (playerInRange)
         {
@@ -147,7 +146,7 @@ public class EnemyAI : MonoBehaviour {
         float angle = Vector3.Angle(directionToPlayer, lineOfSight);
 
         // if the player is within 65 degrees (either direction) of the enemy's centre of vision (i.e. within a 130 degree cone whose centre is directly ahead of the enemy) return true
-        if (angle < 80)
+        if (angle < 75)
             return true;
         else
             return false;
@@ -156,7 +155,7 @@ public class EnemyAI : MonoBehaviour {
     bool PlayerHiddenByObstacles()
     {
 
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         RaycastHit[] hits = Physics.RaycastAll(transform.position, playerTransform.position - transform.position, distanceToPlayer);
         Debug.DrawRay(transform.position, playerTransform.position - transform.position, Color.blue); // draw line in the Scene window to show where the raycast is looking
         List<float> distances = new List<float>();

@@ -28,11 +28,22 @@ public class GameController : MonoBehaviour {
     public AudioClip clickSound;
     public GameObject clickControl;
     private AudioSource clickAS;
+    private AudioSource thisAudioSource;
+    private static bool musicMuted;
+
+    public Sprite speakerIcon;
+    public Sprite speakerMuted;
+    public Image speakerImage;
 
     private int totalTiles;
 
     // Use this for initialization
     void Start () {
+        clickAS = clickControl.GetComponent<AudioSource>();
+        thisAudioSource = GetComponent<AudioSource>();
+        Application.targetFrameRate = 60;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
         Time.timeScale = 1;
         cleanTiles = 0;
 		tiles = GameObject.FindGameObjectsWithTag ("tile");
@@ -40,7 +51,8 @@ public class GameController : MonoBehaviour {
         tileCount = tiles.Length;
 		tileCountText.text = tileCount.ToString();
 
-        clickAS = clickControl.GetComponent<AudioSource>();
+        if (musicMuted)
+            thisAudioSource.Stop();
 
         switch (difficulty)
         {
@@ -98,12 +110,14 @@ public class GameController : MonoBehaviour {
 
 		if (percentageCalc >= winPercentage) {
             winGUI.SetActive(true);
+            Cursor.visible = true;
             if (!played)
             {
                 GetComponent<AudioSource>().PlayOneShot(win, 1.0f);
                 GameObject.Find("Player").GetComponent<AudioSource>().Stop();
                 played = true;
             }
+            tileCountText.color = Color.green;
             gameOver = true;
             Time.timeScale = 0;
 		}
@@ -127,6 +141,7 @@ public class GameController : MonoBehaviour {
         menuGUI.SetActive(true);
         showingMainMenu = true;
         Time.timeScale = 0;
+        Cursor.visible = true;
     }
 
     public void hideMainMenu()
@@ -134,10 +149,26 @@ public class GameController : MonoBehaviour {
         menuGUI.SetActive(false);
         showingMainMenu = false;
         Time.timeScale = 1;
+        Cursor.visible = false;
     }
 
     public void ClickSound()
     {
         clickAS.PlayOneShot(clickSound, 1.0f);
+    }
+
+    public void MuteMusic()
+    {
+        if (musicMuted)
+        {
+            thisAudioSource.Play();
+            speakerImage.sprite = speakerIcon;
+            musicMuted = false;
+        } else
+        {
+            thisAudioSource.Stop();
+            speakerImage.sprite = speakerMuted;
+            musicMuted = true;
+        }
     }
 }

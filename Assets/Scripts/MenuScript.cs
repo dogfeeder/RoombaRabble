@@ -22,8 +22,9 @@ public class MenuScript : MonoBehaviour {
 		exitText = exitText.GetComponent<Button> ();
 		quitMenu.enabled = false;
         clickAS = clickControl.GetComponent<AudioSource>();
-	
-	}
+        Cursor.visible = true;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {

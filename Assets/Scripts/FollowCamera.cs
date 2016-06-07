@@ -32,7 +32,7 @@ public class FollowCamera : MonoBehaviour {
     {
         Vector3 angles = transform.eulerAngles;
         xDeg = 40.0f;
-        yDeg = angles.y;
+        yDeg = 40.0f;
         currentDistance = distance;
         desiredDistance = distance;
         correctedDistance = distance;
