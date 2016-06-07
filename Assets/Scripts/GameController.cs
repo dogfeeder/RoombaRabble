@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour {
     private int totalTiles;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         clickAS = clickControl.GetComponent<AudioSource>();
         thisAudioSource = GetComponent<AudioSource>();
         Application.targetFrameRate = 60;
@@ -46,13 +46,17 @@ public class GameController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Confined;
         Time.timeScale = 1;
         cleanTiles = 0;
-		tiles = GameObject.FindGameObjectsWithTag ("tile");
+        tiles = GameObject.FindGameObjectsWithTag("tile");
         totalTiles = tiles.Length;
         tileCount = tiles.Length;
-		tileCountText.text = tileCount.ToString();
+        tileCountText.text = tileCount.ToString();
 
-        if (musicMuted)
+        if (musicMuted) { 
             thisAudioSource.Stop();
+            speakerImage.sprite = speakerMuted;
+        } else {
+            speakerImage.sprite = speakerIcon;
+        }
 
         switch (difficulty)
         {
